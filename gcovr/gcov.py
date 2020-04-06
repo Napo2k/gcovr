@@ -94,9 +94,9 @@ def process_gcov_data(data_fname, covdata, source_fname, options, currdir=None):
         INPUT = io.open(data_fname, "r", encoding=options.source_encoding,
                         errors='replace')
     except Exception as e:
-        sys.stdout.write("  Cannot open gcov file %s\n" % e.strerror)
+        sys.stdout.write("  Cannot open gcov file %s (%s)\n" % (data_fname, e.strerror))
         return
-
+                
     # Find the source file
     firstline = INPUT.readline()
     fname = guess_source_file_name(
