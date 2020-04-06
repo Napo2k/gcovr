@@ -641,7 +641,7 @@ def run_gcov_and_process_files(
     # it probably includes extra arguments.
     cmd = options.gcov_cmd.split(' ') + [
         abs_filename,
-        "--branch-counts", "--branch-probabilities", "--preserve-paths",
+        "--branch-counts", "--branch-probabilities", "--hash-filenames",
         '--object-directory', os.path.dirname(abs_filename),
     ]
 
