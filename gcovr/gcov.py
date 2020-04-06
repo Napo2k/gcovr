@@ -17,6 +17,7 @@ from .workers import locked_directory
 from .coverage import FileCoverage
 
 output_re = re.compile(r"[Cc]reating [`'](.*)'$")
+#source_re = re.compile("[Cc][annot|ould not] open (source|graph|output) file")
 source_re = re.compile(r"[Cc](annot|ould not) open (source|graph|output) file")
 
 exclude_line_flag = "_EXCL_"
@@ -93,8 +94,7 @@ def process_gcov_data(data_fname, covdata, source_fname, options, currdir=None):
         INPUT = io.open(data_fname, "r", encoding=options.source_encoding,
                         errors='replace')
     except Exception as e:
-        if options.verbose:
-            sys.stdout.write("  Cannot open gcov file %s\n" % e.strerror)
+        sys.stdout.write("  Cannot open gcov file %s\n" % e.strerror)
         return
 
     # Find the source file
