@@ -88,8 +88,14 @@ def is_non_code(code):
 #
 def process_gcov_data(data_fname, covdata, source_fname, options, currdir=None):
     logger = Logger(options.verbose)
-    INPUT = io.open(data_fname, "r", encoding=options.source_encoding,
-                    errors='replace')
+
+    try:
+        INPUT = io.open(data_fname, "r", encoding=options.source_encoding,
+                        errors='replace')
+    except Exception as e:
+        if options.verbose:
+            sys.stdout.write("  Cannot open gcov file %s\n" % e.strerror)
+        return
 
     # Find the source file
     firstline = INPUT.readline()
